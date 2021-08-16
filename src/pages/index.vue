@@ -1,6 +1,6 @@
 <template>
   <img alt="Origin logo" src="../assets/origin-logo.svg" />
-  <HelloWorld msg="origin-vue-ts" />
+  <StartProject msg="Story line" />
 </template>
 
 <route lang="yaml">
@@ -9,5 +9,5 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import HelloWorld from '@/components/HelloWorld.vue'
+import StartProject from '@/components/StartProject.vue'
 </script>

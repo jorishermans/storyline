@@ -11,11 +11,18 @@
   },
   "dependencies": {
     "@nuxt/devalue": "^2.0.0",
+    "@storagestack/core": "^0.7.10",
+    "@storagestack/json-middleware": "^0.7.10",
+    "@storagestack/logging-middleware": "^0.7.14",
+    "@storagestack/search-middleware": "^0.7.13",
+    "@storagestack/webnative-provider": "^0.7.13",
     "@vueuse/core": "^5.1.4",
     "@vueuse/head": "^0.5.1",
     "ipfs-base": "^1.1.0",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.10"
+    "vue-concurrency": "^2.1.2",
+    "vue-router": "^4.0.10",
+    "webnative": "^0.26.1-alpha2"
   },
   "workspaces": [
     "./src/plugins/*"
@@ -42,6 +49,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.14.0",
     "eslint-plugin-yml": "^0.9.0",
+    "naive-ui": "^2.16.2",
     "postcss-nested": "^5.0.5",
     "prettier": "^2.3.2",
     "typescript": "^4.3.5",

@@ -30,4 +30,9 @@ useHead({
   margin-top: 3rem;
   line-height: 1.5em;
 }
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

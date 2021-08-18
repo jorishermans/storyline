@@ -54,7 +54,7 @@ export async function login(): Promise<void> {
 
 // storage stack
 function setupStorageStack(state: sdk.State | undefined) {
-  if (state) ss.registerProvider(new WebNativeProvider(state))
+  if (state) ss.registerProvider(new WebNativeProvider(state, true))
   ss.useOnce('**', new JsonMiddleware())
   ss.useOnce('**', new LoggingMiddleware())
 }

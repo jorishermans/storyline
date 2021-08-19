@@ -15,20 +15,17 @@
 </template>
 
 <script lang="ts" setup>
-import { projectsKey } from '@/store/projects'
+import { useProjectsStore } from '@/store/projects'
 import { NCard, NInput, NInputGroup, NButton, NSpace } from 'naive-ui'
 import { ref } from 'vue'
-import { useStore } from 'vuex'
 
-const store = useStore(projectsKey)
+const store = useProjectsStore()
 
-const value = ref(null)
+const value = ref<string | null>(null)
 const create = () => {
   // add project with name
   console.log(value.value)
-  store
-    .dispatch('addProject', value.value)
-    .then((v) => console.log('succesfull'))
+  store.addProject(value.value)
 }
 </script>
 

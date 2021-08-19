@@ -1,36 +1,30 @@
 import { ss } from '@storagestack/core'
-import { InjectionKey } from 'vue'
-import { createStore, Store } from 'vuex'
+import { defineStore } from 'pinia'
 
-// define your typings for the store state
-export interface ProjectsStoreState {
+interface ProjectsState {
   projects: string[]
 }
 
-// define injection key
-export const projectsKey: InjectionKey<Store<ProjectsStoreState>> =
-  Symbol('project')
-
-export const projectsStore = createStore<ProjectsStoreState>({
-  state: {
+export const useProjectsStore = defineStore({
+  id: 'projects',
+  state: (): ProjectsState => ({
     projects: []
-  },
-  mutations: {
-    // synchronous
-  },
-  actions: {
-    // asynchronous
-    async addProject(this, ctx, payload) {
-      ctx.state.projects.push(payload)
-      await ss.set('private/stories/projects.json', ctx.state.projects)
-    },
-    async fetch(this, ctx) {
-      const projects = await ss.get('private/stories/projects.json')
-      ctx.state.projects = projects ? projects.content : []
+  }),
+  getters: {
+    getProjects(state) {
+      return state.projects
     }
   },
-  modules: {},
-  getters: {
-    getProjects: (state) => state.projects
+  actions: {
+    async addProject(payload: string | null) {
+      if (payload) {
+        this.projects.push(payload)
+        await ss.set('private/stories/projects.json', this.projects)
+      }
+    },
+    async fetch() {
+      const projects = await ss.get('private/stories/projects.json')
+      this.projects = projects ? projects.content : []
+    }
   }
 })

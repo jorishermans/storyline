@@ -2,14 +2,15 @@
   <h1>{{ msg }}</h1>
 
   <p><CreateProject></CreateProject></p>
+  <p><OverviewProjects></OverviewProjects></p>
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps } from 'vue'
+import { defineProps } from 'vue'
 import CreateProject from '@/components/project/CreateProject.vue'
+import OverviewProjects from '@/components/project/OverviewProjects.vue'
 
-const count = ref(0)
-const props = defineProps({
+defineProps({
   msg: {
     type: String,
     required: true

@@ -6,7 +6,6 @@ import { setupLayouts } from 'layouts-generated'
 import { usePlugins } from '@/plugins'
 
 import App from './App.vue'
-import { projectsKey, projectsStore } from './store/projects'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -18,7 +17,6 @@ export const createApp = ViteSSG(
   // function to have custom setups
   (ctx) => {
     usePlugins(ctx)
-    ctx.app.use(projectsStore, projectsKey)
   },
   {
     transformState(state) {

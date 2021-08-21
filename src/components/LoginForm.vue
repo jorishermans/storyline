@@ -7,11 +7,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { login } from '@/functions/useState'
+import { useAuthStore } from '@/store/auth'
 
 export default defineComponent({
   name: 'LoginForm',
   setup: () => {
+    const { login } = useAuthStore()
     return { login }
   }
 })

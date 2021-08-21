@@ -14,16 +14,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { isAuthSucceeded, useState } from '@/functions/useState'
 import LoginForm from '@/components/LoginForm.vue'
 import { TaskInstance, useTask } from 'vue-concurrency'
+import { useAuthStore } from '@/store/auth'
 
 export default defineComponent({
   components: { LoginForm },
   setup: () => {
+    const authStore = useAuthStore()
     const getisAuthSucceededTask = useTask(function* () {
-      const state = yield useState()
-      const result = isAuthSucceeded(state)
+      yield authStore.useState()
+      const result = authStore.isAuthSucceeded
       console.log(result)
       return result
     })

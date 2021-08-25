@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(project, index) in projects" :key="index">
-      <a href="javascript:;">{{ project }}</a>
+      <router-link :to="routeToProject(project)">{{ project }}</router-link>
     </div>
   </div>
 </template>
@@ -13,6 +13,7 @@ import { computed } from 'vue'
 const store = useProjectsStore()
 store.fetch()
 const projects = computed(() => store.$state.projects)
+const routeToProject = (project: string) => `/project/${project}`
 </script>
 
 <style>

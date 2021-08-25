@@ -4,6 +4,7 @@ import { createBase } from 'ipfs-base'
 import generatedRoutes from 'virtual:generated-pages'
 import { setupLayouts } from 'layouts-generated'
 import { usePlugins } from '@/plugins'
+import CKEditor from '@ckeditor/ckeditor5-vue'
 
 import App from './App.vue'
 
@@ -17,6 +18,7 @@ export const createApp = ViteSSG(
   // function to have custom setups
   (ctx) => {
     usePlugins(ctx)
+    ctx.app.use(CKEditor)
   },
   {
     transformState(state) {

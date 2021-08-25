@@ -1,5 +1,4 @@
 <template>
-  <img alt="Origin logo" src="../assets/origin-logo.svg" />
   <StartProject msg="Story line" />
 </template>
 

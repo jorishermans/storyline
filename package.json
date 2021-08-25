@@ -10,6 +10,9 @@
     "lint": "eslint '**/*.{js,ts,tsx,vue}' --quiet --fix"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^29.1.0",
+    "@ckeditor/ckeditor5-build-inline": "^29.1.0",
+    "@ckeditor/ckeditor5-vue": "^2.0.1",
     "@nuxt/devalue": "^2.0.0",
     "@storagestack/core": "^0.7.10",
     "@storagestack/json-middleware": "^0.7.10",
@@ -19,6 +22,7 @@
     "@vueuse/core": "^5.1.4",
     "@vueuse/head": "^0.5.1",
     "ipfs-base": "^1.1.0",
+    "rxjs": "^7.3.0",
     "vue": "^3.0.5",
     "vue-concurrency": "^2.1.2",
     "vue-router": "^4.0.10",

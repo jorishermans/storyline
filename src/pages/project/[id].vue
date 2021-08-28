@@ -1,11 +1,14 @@
 <template>
-  <h1>{{ title }}</h1>
+  <h1 class="project-title">{{ title }}</h1>
   <div id="app">
     <TextEditor
       :editable="true"
       :data="content"
       @update="updateText"
     ></TextEditor>
+  </div>
+  <div class="navigation">
+    <NavigationPageItem></NavigationPageItem>
   </div>
 </template>
 
@@ -18,7 +21,16 @@ meta:
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import TextEditor from '@/components/common/TextEditor.vue'
+import NavigationPageItem from '@/components/project/NavigationPageItem.vue'
 import { useProjectStore } from '@/store/project'
+
+export interface IDPageProps {
+  id: string
+}
+
+withDefaults(defineProps<IDPageProps>(), {
+  id: 'hello'
+})
 
 const route = useRoute()
 
@@ -39,3 +51,12 @@ const updateText = (value: any) => {
 
 const title = computed(() => route.params.id)
 </script>
+
+<style>
+h1.project-title {
+  padding: 0 var(--ck-spacing-standard);
+}
+.navigation {
+  padding: 15px 0;
+}
+</style>

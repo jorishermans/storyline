@@ -1,5 +1,11 @@
 <template>
   <div>
+    <hr />
+    <span v-for="(item, index) in links" :key="index" class="nav-item">
+      <router-link :to="routeToPage(item, projectName)">{{
+        item.name
+      }}</router-link>
+    </span>
     <n-button round @click="showModal = true">
       <template #icon>
         <n-icon size="18">
@@ -32,8 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-// import { useProjectsStore } from '@/store/projects'
-// const store = useProjectsStore()
+import { useProjectStore } from '@/store/project'
 import {
   NIcon,
   NButton,
@@ -43,14 +48,33 @@ import {
   NInputGroup,
   NSpace
 } from 'naive-ui'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+
+const store = useProjectStore()
+const links = computed(() => {
+  console.log(store.pageItem)
+  return store.pageItem?.children
+})
+const projectName = computed(() => store.projectName)
+
+const routeToPage = (
+  project: { filename: string; name: string },
+  projectName: string
+) => `/project/t/${projectName}/${project.filename}`
 
 const showModal = ref(false)
 const value = ref<string | null>(null)
+
+const emit = defineEmits<{
+  (e: 'create', value: string): void
+}>()
+
 const create = () => {
   // add project with name
-  console.log(value.value)
   showModal.value = false
+  if (value.value) {
+    emit('create', value.value)
+  }
 }
 </script>
 
@@ -60,5 +84,13 @@ const create = () => {
 }
 .n-input {
   text-align: left;
+}
+.nav-item {
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+}
+.nav-item:hover {
+  color: #36ad6a;
 }
 </style>

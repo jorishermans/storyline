@@ -1,5 +1,5 @@
 <template>
-  <EditProjectPage :id="id"></EditProjectPage>
+  <EditProjectPage :id="id" :file-name="page"></EditProjectPage>
 </template>
 
 <route lang="yaml">
@@ -14,6 +14,7 @@ import EditProjectPage from '@/components/project/EditProjectPage.vue'
 
 const route = useRoute()
 const id = computed(() => route.params.id as string)
+const page = computed(() => route.params.page as string)
 </script>
 
 <style>

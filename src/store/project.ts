@@ -55,8 +55,10 @@ export const useProjectStore = defineStore({
   },
   actions: {
     async goTo(fileName: string) {
+      console.log('write to latest.json ...', fileName)
       if (fileName) {
         this.cursor = fileName
+        console.log('write to latest.json ...', fileName)
         await ss.set(
           `private/stories/${this.getProjectName}/latest.json`,
           fileName
@@ -84,7 +86,7 @@ export const useProjectStore = defineStore({
       }
     },
     async updatePageItemContent(content: string) {
-      if (this.pageItem) {
+      if (this.pageItem && this.getCursor) {
         this.pageItem.content = content
         await ss.set(
           `private/stories/${this.getProjectName}/${this.getCursor}`,

@@ -1,15 +1,19 @@
 <template>
-  <h1 class="project-title">{{ props.id }}</h1>
-  <div id="app">
+  <h3 class="project-title">{{ props.id }}</h3>
+  <div v-if="loaded" id="app">
     <TextEditor
       :editable="true"
       :data="content"
       @update="updateText"
     ></TextEditor>
+    <div class="navigation">
+      <NavigationPageItem
+        :children="children"
+        @create="createPageLink"
+      ></NavigationPageItem>
+    </div>
   </div>
-  <div class="navigation">
-    <NavigationPageItem @create="createPageLink"></NavigationPageItem>
-  </div>
+  <div v-if="!loaded">loading ...</div>
 </template>
 
 <route lang="yaml">
@@ -25,6 +29,7 @@ import { ref } from 'vue'
 
 export interface IDPageProps {
   id: string
+  fileName: string
 }
 
 const props = withDefaults(defineProps<IDPageProps>(), {
@@ -34,15 +39,23 @@ const props = withDefaults(defineProps<IDPageProps>(), {
 
 const projectStore = useProjectStore()
 projectStore.projectName = props.id as string
+let goToPromise = Promise.resolve()
 if (props.fileName) {
-  projectStore.goTo(props.fileName)
+  console.log('goTo ...')
+  goToPromise = projectStore.goTo(props.fileName)
 }
 // handling content for this page ...
 const content = ref({ text: 'here comes content' })
-projectStore.fetch().then(() => {
-  if (projectStore.pageItem) {
-    content.value = { text: projectStore.pageItem.content }
-  }
+const children = ref<{ filename: string; name: string }[]>([])
+const loaded = ref<boolean>(false)
+goToPromise.then(() => {
+  projectStore.fetch().then(() => {
+    loaded.value = true
+    if (projectStore.pageItem) {
+      content.value = { text: projectStore.pageItem.content }
+      children.value = projectStore.pageItem.children
+    }
+  })
 })
 
 const updateText = (value: { text: string }) => {

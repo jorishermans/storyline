@@ -1,7 +1,7 @@
 <template>
   <div>
     <hr />
-    <span v-for="(item, index) in links" :key="index" class="nav-item">
+    <span v-for="(item, index) in props.children" :key="index" class="nav-item">
       <router-link :to="routeToPage(item, projectName)">{{
         item.name
       }}</router-link>
@@ -50,11 +50,13 @@ import {
 } from 'naive-ui'
 import { computed, ref } from 'vue'
 
+export interface IDPageProps {
+  children: { filename: string; name: string }[] | any[]
+}
+
+const props = defineProps<IDPageProps>()
+
 const store = useProjectStore()
-const links = computed(() => {
-  console.log(store.pageItem)
-  return store.pageItem?.children
-})
 const projectName = computed(() => store.projectName)
 
 const routeToPage = (
